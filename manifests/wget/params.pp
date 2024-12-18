@@ -3,7 +3,7 @@
 # Platform-dependent parameters for wget.
 #
 class sys::wget::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     openbsd: {
       include sys::openbsd::pkg
       $package = 'wget'

@@ -4,5 +4,5 @@
 #
 class sys::openbsd::params {
   # The default mirror for OpenBSD packages.
-  $mirror = "http://ftp3.usa.openbsd.org/pub/OpenBSD/${::kernelmajversion}/packages/${::architecture}/"
+  $mirror = "http://ftp3.usa.openbsd.org/pub/OpenBSD/${::kernelmajversion}/packages/${facts['os']['architecture']}/"
 }

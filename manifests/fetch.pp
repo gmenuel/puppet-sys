@@ -44,7 +44,7 @@ define sys::fetch(
   $user         = undef,
 ) {
 
-  if ($redownload and $::osfamily != 'windows') {
+  if ($redownload and $facts['os']['family'] != 'windows') {
     $unless  = "test -s ${destination}"
     $creates = undef
   } else {
@@ -52,7 +52,7 @@ define sys::fetch(
     $creates = $destination
   }
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       # Use cURL on OS X.
       if $cert_check {
@@ -83,7 +83,7 @@ define sys::fetch(
     }
   }
 
-  if $::osfamily == 'windows' {
+  if $facts['os']['family'] == 'windows' {
     $command = "(New-Object Net.WebClient).DownloadFile('${source}', '${destination}')"
   } else {
     # Constructing download options string using stdlib's `join` function.

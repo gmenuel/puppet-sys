@@ -10,7 +10,7 @@
 #
 class sys {
   # Settings for the root and binary groups.
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $binary_group = 'wheel'
       $root_group   = 'wheel'
@@ -34,7 +34,7 @@ class sys {
   }
 
   # The root home directory is different on OS X.
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $root_home = '/var/root'
     }
@@ -44,7 +44,7 @@ class sys {
   }
 
   # If we're on Debian-based systems, they use 'nogroup' instead of 'nobody'.
-  case $::osfamily {
+  case $facts['os']['family'] {
     debian: {
       $nobody_group = 'nogroup'
     }

@@ -21,47 +21,47 @@ class sys::apt::mirror(
   $repositories = [
     {
       'uri'          => $uri,
-      'distribution' => $::lsbdistcodename,
+      'distribution' => $facts['os']['distro']['codename'],
       'components'   => ['main', 'restricted'],
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-updates",
+      'distribution' => "${facts['os']['distro']['codename']}-updates",
       'components'   => ['main', 'restricted'],
     },
     {
       'uri'          => $uri,
-      'distribution' => $::lsbdistcodename,
+      'distribution' => $facts['os']['distro']['codename'],
       'components'   => 'universe',
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-updates",
+      'distribution' => "${facts['os']['distro']['codename']}-updates",
       'components'   => 'universe',
     },
     {
       'uri'          => $uri,
-      'distribution' => $::lsbdistcodename,
+      'distribution' => $facts['os']['distro']['codename'],
       'components'   => 'multiverse',
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-updates",
+      'distribution' => "${facts['os']['distro']['codename']}-updates",
       'components'   => 'multiverse',
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-security",
+      'distribution' => "${facts['os']['distro']['codename']}-security",
       'components'   => ['main', 'restricted'],
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-security",
+      'distribution' => "${facts['os']['distro']['codename']}-security",
       'components'   => 'universe',
     },
     {
       'uri'          => $uri,
-      'distribution' => "${::lsbdistcodename}-security",
+      'distribution' => "${facts['os']['distro']['codename']}-security",
       'components'   => 'multiverse',
     },
   ]

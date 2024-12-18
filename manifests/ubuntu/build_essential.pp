@@ -11,7 +11,7 @@ class sys::ubuntu::build_essential {
   }
 
   # Debian and Ubuntu have different names for kernel headers package.
-  if $::lsbdistid == 'Debian' {
+  if $facts['os']['distro']['id'] == 'Debian' {
     $kernel_flavor = $::kernelrelease
   } else {
     # Have to extract the "flavor" of the kernel from the $::kernelrelease

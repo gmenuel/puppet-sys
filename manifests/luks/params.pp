@@ -3,12 +3,12 @@
 # Platform-dependent parameters for LUKS.
 #
 class sys::luks::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     debian: {
       $package = 'cryptsetup'
     }
     redhat: {
-      case $::operatingsystemmajrelease {
+      case $facts['os']['release']['major'] {
         7: {
           $package = 'cryptsetup'
         }
@@ -21,7 +21,7 @@ class sys::luks::params {
       $package = 'cryptsetup'
     }
     default: {
-      fail("Do not know how to install LUKS on ${::osfamily}.\n")
+      fail("Do not know how to install LUKS on ${facts['os']['family']}.\n")
     }
   }
 }

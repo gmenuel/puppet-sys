@@ -3,7 +3,7 @@
 # Platform-dependent parameters for the bash shell.
 #
 class sys::bash::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       # Bash is included by default on OS X.
       $package = false
@@ -36,7 +36,7 @@ class sys::bash::params {
       $defpath  = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
     }
     default: {
-      fail("Don't know how to install bash on ${::osfamily}.\n")
+      fail("Don't know how to install bash on ${facts['os']['family']}.\n")
     }
   }
 }

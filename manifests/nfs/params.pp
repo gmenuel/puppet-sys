@@ -3,7 +3,7 @@
 # Platform-independent parameters for installing NFS client and/or server.
 #
 class sys::nfs::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       # NFS client and server built-in to OS X.
       $client = false
@@ -26,7 +26,7 @@ class sys::nfs::params {
       $provider = 'pkg'
     }
     default: {
-      fail("Do not know how to install NFS on ${::osfamily}\n")
+      fail("Do not know how to install NFS on ${facts['os']['family']}\n")
     }
   }
 }

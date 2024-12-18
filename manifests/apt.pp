@@ -26,7 +26,7 @@ class sys::apt(
   $dpkg_opts = '-o DPkg::Options="--force-confold"',
   $cache     = '/var/cache/apt',
 ){
-  if $::osfamily != 'Debian' {
+  if $facts['os']['family'] != 'Debian' {
     fail("This class only supported on Debian-based platforms.\n")
   }
 

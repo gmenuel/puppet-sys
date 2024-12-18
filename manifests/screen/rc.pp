@@ -34,7 +34,7 @@ define sys::screen::rc(
   $group    = undef,
   $home     = undef,
   $extra    = undef,
-  $template = "sys/screen/${::osfamily}.erb",
+  $template = "sys/screen/${facts['os']['family']}.erb",
 ) {
   include sys::screen
 

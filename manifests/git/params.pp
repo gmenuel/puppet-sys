@@ -3,7 +3,7 @@
 # Platform-dependent parameters for git.
 #
 class sys::git::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     openbsd: {
       include sys::openbsd::pkg
       $package  = 'git'
@@ -25,7 +25,7 @@ class sys::git::params {
       $release_tag = "v${version}.windows.1"
       $base_url = "https://github.com/git-for-windows/git/releases/download/${release_tag}/"
 
-      if $::architecture == 'x64' {
+      if $facts['os']['architecture'] == 'x64' {
         $basename = "Git-${version}-64-bit.exe"
       } else {
         $basename = "Git-${version}-32-bit.exe"
@@ -36,7 +36,7 @@ class sys::git::params {
       $win_path = 'C:\Program Files\Git\cmd'
     }
     default: {
-      fail("Do not know how to install git on ${::osfamily}.\n")
+      fail("Do not know how to install git on ${facts['os']['family']}.\n")
     }
   }
 }

@@ -3,7 +3,7 @@
 # Platform-dependent parameters for unzip.
 #
 class sys::unzip::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $package = false
       $path = '/usr/bin/unzip'

@@ -3,7 +3,7 @@
 # Platform-dependent parameters for the Z shell.
 #
 class sys::zsh::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $package = false
       $path    = '/bin/zsh'
@@ -29,7 +29,7 @@ class sys::zsh::params {
       $path    = '/bin/zsh'
     }
     default: {
-      fail("Don't know how to install bash on ${::osfamily}.\n")
+      fail("Don't know how to install bash on ${facts['os']['family']}.\n")
     }
   }
 }

@@ -3,7 +3,7 @@
 # Platform-dependent parameters for curl.
 #
 class sys::curl::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       # Curl included by default on OS X.
       $package = false

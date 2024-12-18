@@ -47,7 +47,7 @@ define sys::bash::rc(
   $extra      = undef,
   $path       = undef,
   $pythonpath = undef,
-  $template   = "sys/bash/${::osfamily}.erb",
+  $template   = "sys/bash/${facts['os']['family']}.erb",
 ) {
   include sys::bash
 
@@ -104,7 +104,7 @@ define sys::bash::rc(
     require => File["${homedir}/.bashrc"],
   }
 
-  if $::operatingsystem == 'Solaris' {
+  if $facts['os']['name'] == 'Solaris' {
     file { "${homedir}/.zfs_completion":
       ensure => $file_ensure,
       mode   => '0600',

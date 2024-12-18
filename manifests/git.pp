@@ -37,7 +37,7 @@ class sys::git (
   $win_path        = $sys::git::params::win_path,
 ) inherits sys::git::params {
   # Extra gymnastics necessary if on windows.
-  if $::osfamily == 'windows' {
+  if $facts['os']['family'] == 'windows' {
     # If a source is passed in, use it -- this can be a HTTP URL or UNC.
     if $source {
       $source_uri = $source
@@ -66,7 +66,7 @@ class sys::git (
         require   => Package[$package],
       }
 
-      if $::architecture == 'x64' {
+      if $facts['os']['architecture'] == 'x64' {
         # Git now has native 64-bit support, remove 32-path.
         windows::path { 'git-path-legacy':
           ensure    => absent,

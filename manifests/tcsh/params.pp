@@ -3,7 +3,7 @@
 # Platform-dependent parameters for tcsh.
 #
 class sys::tcsh::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $package = false
       $path    = '/bin/tcsh'
@@ -29,7 +29,7 @@ class sys::tcsh::params {
       $path    = '/bin/tcsh'
     }
     default: {
-      fail("Don't know how to install bash on ${::osfamily}.\n")
+      fail("Don't know how to install bash on ${facts['os']['family']}.\n")
     }
   }
 }

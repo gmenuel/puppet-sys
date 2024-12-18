@@ -3,7 +3,7 @@
 # Platform-dependent parameters for GCC.
 #
 class sys::gcc::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     openbsd: {
       # GCC included by default on OpenBSD.
       $packages = false
@@ -18,7 +18,7 @@ class sys::gcc::params {
       $packages = ['gcc', 'gcc-c++', 'make']
     }
     default: {
-      fail("Do not know how to install/configure GCC on ${::osfamily}.\n")
+      fail("Do not know how to install/configure GCC on ${facts['os']['family']}.\n")
     }
   }
 }

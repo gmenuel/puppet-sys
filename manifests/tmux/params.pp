@@ -3,7 +3,7 @@
 # Platform-dependent parameters for installing tmux.
 #
 class sys::tmux::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     openbsd: {
       # tmux included by default
       $package = false
@@ -15,7 +15,7 @@ class sys::tmux::params {
       $package = 'tmux'
     }
     default: {
-      fail("Do not know how to install tmux on ${::osfamily}.")
+      fail("Do not know how to install tmux on ${facts['os']['family']}.")
     }
   }
 }

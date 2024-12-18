@@ -3,7 +3,7 @@
 # Platform-dependent parameters for SSH.
 #
 class sys::ssh::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $client = false
       $server = false
@@ -35,7 +35,7 @@ class sys::ssh::params {
       }
     }
     solaris: {
-      if $::operatingsystemrelease < '5.11' {
+      if $facts['os']['release']['full'] < '5.11' {
         fail("SSH module supported only on Solaris 5.11 and above.\n")
       }
       $client = 'network/ssh'
@@ -48,7 +48,7 @@ class sys::ssh::params {
       $ed25519 = false
     }
     debian: {
-      if $::operatingsystem == 'Ubuntu' {
+      if $facts['os']['name'] == 'Ubuntu' {
         $ecdsa_compare = '12'
         $ed25519_compare = '14'
       } else {
@@ -58,7 +58,7 @@ class sys::ssh::params {
 
       # Facter 2.2+ changed lsbmajdistrelease fact, e.g., now returns
       # '12.04' instead of '12' on Ubuntu precise.
-      $lsb_major_release = regsubst($::lsbmajdistrelease, '^(\d+).*', '\1')
+      $lsb_major_release = regsubst($facts['os']['distro']['release']['major'], '^(\d+).*', '\1')
 
       # ECDSA supported in Ubuntu 12.04 / Debian 7 and up.
       if versioncmp($lsb_major_release, $ecdsa_compare) >= 0 {
@@ -91,12 +91,12 @@ class sys::ssh::params {
       $ed25519 = false
     }
     default: {
-      fail("The SSH module is not supported on ${::osfamily}.\n")
+      fail("The SSH module is not supported on ${facts['os']['family']}.\n")
     }
   }
 
   # Configuration file locations.  Macs are the special snowflake here.
-  case $::osfamily {
+  case $facts['os']['family'] {
     darwin: {
       $ssh_config  = '/etc/ssh_config'
       $sshd_config = '/etc/sshd_config'

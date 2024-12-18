@@ -3,7 +3,7 @@
 # Platform-dependent parameters for installing screen.
 #
 class sys::screen::params {
-  case $::osfamily {
+  case $facts['os']['family'] {
     openbsd: {
       include sys::openbsd::pkg
       $package = 'screen'
